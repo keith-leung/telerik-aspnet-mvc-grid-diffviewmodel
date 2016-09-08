@@ -1,0 +1,131 @@
+﻿@using Kendo.Mvc.UI
+@using TelerikMvcApp1.Models
+
+@{
+    ViewBag.Title = "Test Entity With Different View Model Type";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="row">
+    @(Html.Kendo().TabStrip()
+        .Name("tabs")
+        .Items(
+    tabs =>
+    {
+        tabs.Add().Text("Tab A").Selected(true)
+        .Content(@<text>
+            @(Html.Kendo().Grid<TestEntityViewModelA>()
+        .Name("gridA")
+        .Columns(
+            columns =>
+            {
+                columns.Bound(c => c.TestEntityId).Hidden();
+                columns.Bound(c => c.TitleStartWith);
+                columns.Bound(c => c.ContentStartWith);
+            }
+        )
+        .Resizable(resize => resize.Columns(true))
+        .Scrollable(scrollable =>
+        {
+            scrollable.Enabled(true); scrollable.Height(400);
+        })
+        .Filterable(filterable => filterable.Mode(GridFilterMode.Menu))
+        .Pageable(pg =>
+        {
+            pg.PageSizes(new int[] { 5, 10, 20, 50 }).Refresh(true);
+        }).Sortable()
+        .DataSource(dataSource => dataSource
+            .Ajax().PageSize(10)
+            .Model(model => model.Id(p => p.TestEntityId))
+            .Read(read => read.Action("TestEntityA_Read", "TestEntities"))
+        ))
+        </text>);
+        tabs.Add().Text("Tab B")
+        .Content(@<text>
+            @(Html.Kendo().Grid<TestEntityViewModelB>()
+        .Name("gridB")
+        .Columns(
+            columns =>
+            {
+                columns.Bound(c => c.TestEntityId).Hidden();
+                columns.Bound(c => c.TitleEndWith);
+                columns.Bound(c => c.ContentEndWith);
+            }
+        )
+        .Resizable(resize => resize.Columns(true))
+        .Scrollable(scrollable =>
+        {
+            scrollable.Enabled(true); scrollable.Height(400);
+        })
+        .Filterable(filterable => filterable.Mode(GridFilterMode.Menu))
+        .Pageable(pg =>
+        {
+            pg.PageSizes(new int[] { 5, 10, 20, 50 }).Refresh(true);
+        }).Sortable()
+        .DataSource(dataSource => dataSource
+            .Ajax().PageSize(10)
+            .Model(model => model.Id(p => p.TestEntityId))
+            .Read(read => read.Action("TestEntityB_Read", "TestEntities"))
+        ))
+        </text>);
+        tabs.Add().Text("Tab C")
+        .Content(@<text>
+            @(Html.Kendo().Grid<TestEntityViewModelC>()
+        .Name("gridC")
+        .Columns(
+            columns =>
+            {
+                columns.Bound(c => c.TestEntityId).Hidden();
+                columns.Bound(c => c.TitleContains);
+                columns.Bound(c => c.ContentContains);
+            }
+        )
+        .Resizable(resize => resize.Columns(true))
+        .Scrollable(scrollable =>
+        {
+            scrollable.Enabled(true); scrollable.Height(400);
+        })
+        .Filterable(filterable => filterable.Mode(GridFilterMode.Menu))
+        .Pageable(pg =>
+        {
+            pg.PageSizes(new int[] { 5, 10, 20, 50 }).Refresh(true);
+        }).Sortable()
+        .DataSource(dataSource => dataSource
+            .Ajax().PageSize(10)
+            .Model(model => model.Id(p => p.TestEntityId))
+            .Read(read => read.Action("TestEntityC_Read", "TestEntities"))
+        ))
+        </text>);
+        tabs.Add().Text("Tab D")
+        .Content(@<text>
+            @(Html.Kendo().Grid<TestEntityViewModelD>()
+        .Name("gridD")
+        .Columns(
+            columns =>
+            {
+                columns.Bound(c => c.TestEntityId).Hidden();
+                columns.Bound(c => c.TitleNotContains);
+                columns.Bound(c => c.ContentNotContains);
+            }
+        )
+        .Resizable(resize => resize.Columns(true))
+        .Scrollable(scrollable =>
+        {
+            scrollable.Enabled(true); scrollable.Height(400);
+        })
+        .Filterable(filterable => filterable.Mode(GridFilterMode.Menu))
+        .Pageable(pg =>
+        {
+            pg.PageSizes(new int[] { 5, 10, 20, 50 }).Refresh(true);
+        }).Sortable()
+        .DataSource(dataSource => dataSource
+            .Ajax().PageSize(10)
+            .Model(model => model.Id(p => p.TestEntityId))
+            .Read(read => read.Action("TestEntityD_Read", "TestEntities"))
+        ))
+        </text>);
+    }
+    )
+    ) 
+</div>
